@@ -6,10 +6,12 @@ import csv
 import json
 
 def index(request):
-    #print download_data()
-    #download_2()
-    #extract_zip()
-    return HttpResponse("Hello, world. You're at the polls index.")
+    return HttpResponse("Hello, world. You're at the springs index.")
+
+def download(request):
+    download_data()
+    extract_zip()
+    return HttpResponse("Hello, world. You're at the springs index.")
 
 def extract_zip():
     zip_ref = zipfile.ZipFile("GWDBDownload.zip", 'r')
@@ -54,10 +56,10 @@ def convert_to_json(filename):
     reader = csv.DictReader( csvfile, fieldnames=None, delimiter='|')
     json_resp = ''
     for index,row in enumerate(reader):
-       # if index == 0:
-       #     continue
-        #json_resp = json_resp + str(row)
-	json.dump(row, json_resp)
-        json.dump(row, jsonfile)
+        if index == 0:
+            continue
+        json_resp = json_resp + str(row)
+	json.dump(row, jsonfile)
+        #json.dump(row, json_resp)
         jsonfile.write('\n')
-    return json_resp
+    return '{' + json_resp + '}'
