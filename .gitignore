@@ -2,5 +2,5 @@ GWDBDownload.zip
 /temp*
 .DS_Store
 *.DS_Store
-*pyc
+*.pyc
 file.json
