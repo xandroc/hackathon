@@ -65,4 +65,4 @@ def convert_to_json(filename):
             jsonfile.write(',')
         # strip the last hanging comma
         json_resp = json_resp[:-1]
-    return '{ "response" = [' + json_resp + ']}'
+    return '{ "response" : [' + json_resp + ']}'
