@@ -21,5 +21,3 @@ urlpatterns = [
     url(r'^springs/', include('springs.urls')),
     url(r'^admin/', admin.site.urls),
 ]
-
-
