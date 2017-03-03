@@ -6,6 +6,7 @@
         center: {lat:30.3857846, lng:-97.7253762},
         zoom: 8
         });
+      window.map.infoWindow = new google.maps.InfoWindow();
 	  google.maps.event.addListenerOnce(window.map._map, 'idle', function(){
         initData();
 	  });
