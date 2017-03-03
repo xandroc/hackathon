@@ -58,8 +58,11 @@ def convert_to_json(filename):
     for index,row in enumerate(reader):
         if index == 0:
             continue
-        json_resp = json_resp + str(row)
-	json.dump(row, jsonfile)
+        json_resp = json_resp + str(row) + ','
+	#json.dump(row, jsonfile)
         #json.dump(row, json_resp)
-        jsonfile.write('\n')
-    return '{' + json_resp + '}'
+        if index > 0:
+            jsonfile.write(',')
+        # strip the last hanging comma
+        json_resp = json_resp[:-1]
+    return '{ "response" = [' + json_resp + ']}'
