@@ -1,4 +1,6 @@
+from django.shortcuts import render
 from django.http import HttpResponse
+from django.http import JsonResponse
 import urllib2
 #from get_data import download_data, download_2
 import zipfile
@@ -54,15 +56,17 @@ def convert_to_json(filename):
     jsonfile = open('file.json', 'w')
 
     reader = csv.DictReader( csvfile, fieldnames=None, delimiter='|')
-    json_resp = ''
+    json_resp = []
     for index,row in enumerate(reader):
         if index == 0:
             continue
-        json_resp = json_resp + str(row) + ','
-	#json.dump(row, jsonfile)
+        json_resp.append(row)
+	#json.dump(row, jsonfile, encoding='utf-8')
         #json.dump(row, json_resp)
-        if index > 0:
-            jsonfile.write(',')
-        # strip the last hanging comma
-        json_resp = json_resp[:-1]
-    return '{ "response" : [' + json_resp + ']}'
+        #jsonfile.write('\n')
+        if index == 100:
+            break
+    return JsonResponse(json_resp, safe=False)
+
+def render_map(request):
+    return render(request, 'google_map.html')
